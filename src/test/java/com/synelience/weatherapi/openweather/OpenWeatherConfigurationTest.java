@@ -1,6 +1,5 @@
-package com.synelience.weatherapi.openweather.service;
+package com.synelience.weatherapi.openweather;
 
-import com.synelience.weatherapi.openweather.OpenWeatherConfiguration;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@Disabled
 public class OpenWeatherConfigurationTest {
 
     @Autowired
     private OpenWeatherConfiguration config;
 
     @Test
-    @Disabled
     public void givenApplicationBoot_itShouldApplyConfiguration() {
         assertEquals("value", config.getApiKey());
         assertEquals("api.openweathermap.org/data/2.5", config.getUrl());

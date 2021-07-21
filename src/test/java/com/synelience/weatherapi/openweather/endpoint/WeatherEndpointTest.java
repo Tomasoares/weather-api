@@ -2,6 +2,7 @@ package com.synelience.weatherapi.openweather.endpoint;
 
 import com.synelience.weatherapi.openweather.OpenWeatherConfiguration;
 import com.synelience.weatherapi.openweather.endpoint.api.WeatherEndpoint;
+import com.synelience.weatherapi.openweather.model.CurrentWeather;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,22 +29,22 @@ public class WeatherEndpointTest {
         String apiKey = cfg.getApiKey();
         String units = "metric";
 
-        ResponseEntity<String> response = this.endpoint.callCurrentWeatherEndpoint(city, apiKey, units);
+        ResponseEntity<CurrentWeather> response = this.endpoint.callCurrentWeatherEndpoint(city, apiKey, units);
         System.out.println(response.getBody());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    public void givenFlorianopolisCity_whenCallCurrentWeatherEndpoint_whenNoApiKey_shouldReturnUnauthorized() {
-        String city = "Florianopolis";
-        String apiKey = null;
+    public void givenInvalidCity_whenCallCurrentWeatherEndpoint_shouldReturnNotFound() {
+        String city = "abc";
+        String apiKey = cfg.getApiKey();
         String units = "metric";
 
-        ResponseEntity<String> response = this.endpoint.callCurrentWeatherEndpoint(city, apiKey, units);
+        ResponseEntity<CurrentWeather> response = this.endpoint.callCurrentWeatherEndpoint(city, apiKey, units);
         System.out.println(response.getBody());
 
-        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
 }
