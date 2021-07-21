@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface OpenWeatherService {
 
     Optional<CurrentWeather> getCurrentWeather(String city) throws InvalidApiKeyException;
-    
+
 }
