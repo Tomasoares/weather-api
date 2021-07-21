@@ -23,25 +23,25 @@ public class WeatherEndpointImpl implements WeatherEndpoint {
     }
 
     @Override
-    public ResponseEntity<String> callCurrentWeatherEndpoint(String city) {
-        URI uri = this.buildUrl(city);
+    public ResponseEntity<String> callCurrentWeatherEndpoint(String city, String apiKey, String units) {
+        URI uri = this.buildUrl(city, apiKey, units);
         ResponseEntity<String> response = this.template.getForEntity(uri, String.class);
         return response;
     }
 
-    protected URI buildUrl(String city) {
+    protected URI buildUrl(String city, String apiKey, String units) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(this.cfg.getUrl() + this.cfg.getWeatherUri());
 
         if (Strings.isNotBlank(city)) {
             builder.queryParam("q", city);
         }
 
-        if (Strings.isNotBlank(this.cfg.getApiKey())) {
-            builder.queryParam("appid", this.cfg.getApiKey());
+        if (Strings.isNotBlank(apiKey)) {
+            builder.queryParam("appid", apiKey);
         }
 
         if (Strings.isNotBlank(this.cfg.getUnits())) {
-            builder.queryParam("units", this.cfg.getUnits());
+            builder.queryParam("units", units);
         }
 
         return builder.build().toUri();

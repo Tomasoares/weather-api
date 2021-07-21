@@ -1,6 +1,6 @@
 package com.synelience.weatherapi.openweather.service.api;
 
-import com.synelience.weatherapi.model.external.CurrentWeather;
+import com.synelience.weatherapi.openweather.model.CurrentWeather;
 
 public interface OpenWeatherService {
 
