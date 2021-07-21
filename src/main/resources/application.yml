@@ -7,6 +7,10 @@ server:
   servlet:
     context-path: /weather-api
 
-open-weather-map:
+open-weather:
   api-key: value
+  url: api.openweathermap.org/data/2.5/
+  weather-uri: /weather
+  units: metric
+
 

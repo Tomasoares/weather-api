@@ -1,16 +1,13 @@
 package com.synelience.weatherapi.controller;
 
 import com.synelience.weatherapi.model.Heartbeat;
-import com.synelience.weatherapi.util.ApiConstants;
 import com.synelience.weatherapi.util.URLBuilder;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -24,7 +21,7 @@ public class HealthControllerTest {
 
     @Test
     public void test_givenHealthEndpoint_whenGet_shouldReturnStatusOk() {
-        String url = URLBuilder.getAddress(ResourceConstants.HEALTH);
+        String url = URLBuilder.getAddress(ResourceConstants.HEALTH, port);
 
         ResponseEntity<Heartbeat> response
                 = template.getForEntity(url, Heartbeat.class);
@@ -34,7 +31,7 @@ public class HealthControllerTest {
 
     @Test
     public void test_givenHealthEndpoint_whenGet_shouldReturnHeartbeatImAlive() {
-        String url = URLBuilder.getAddress(ResourceConstants.HEALTH);
+        String url = URLBuilder.getAddress(ResourceConstants.HEALTH, port);
 
         ResponseEntity<Heartbeat> response
                 = template.getForEntity(url, Heartbeat.class);
