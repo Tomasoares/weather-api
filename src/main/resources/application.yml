@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: weather-api
+
+server:
+  port: 8080
+  servlet:
+    context-path: /weather-api
+
+open-weather-map:
+  api-key: value
+
