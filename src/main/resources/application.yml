@@ -8,8 +8,8 @@ server:
     context-path: /weather-api
 
 open-weather:
-  api-key: value
-  url: api.openweathermap.org/data/2.5/
+  api-key: 2f5804bd8c1e95ea6d1f86b6e2b8f28b
+  url: http://api.openweathermap.org/data/2.5
   weather-uri: /weather
   units: metric
 
