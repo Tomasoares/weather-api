@@ -11,11 +11,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Base64;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HealthControllerIntegrationTest {
+public class AuthenticationControllerIntegrationTest {
 
     @LocalServerPort
     private int port;
@@ -25,22 +28,23 @@ public class HealthControllerIntegrationTest {
 
     @BeforeEach
     public void init() {
-        targetUrl = URLBuilder.getAddress(ResourceConstants.HEALTH, port);
+        this.targetUrl = URLBuilder.getAddress(ResourceConstants.AUTHENTICATION, port);
     }
 
     @Test
-    public void givenHealthEndpoint_whenGetHeartbeat_shouldReturnStatusOk() {
-        ResponseEntity<Heartbeat> response
-                = template.getForEntity(targetUrl, Heartbeat.class);
+    public void givenValidCredentials_whenGetApiToken_shouldReturnStatusOk() {
+        ResponseEntity<String> response = template.withBasicAuth("synelience", "synelience")
+                .getForEntity(targetUrl, String.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    public void givenHealthEndpoint_whenGetHearbeat_shouldReturnHeartbeatImAlive() {
-        ResponseEntity<Heartbeat> response
-                = template.getForEntity(targetUrl, Heartbeat.class);
+    public void givenValidCredentials_whenGetApiToken_shouldReturnApiToken() {
+        ResponseEntity<String> response = template.withBasicAuth("synelience", "synelience")
+                .getForEntity(targetUrl, String.class);
 
-        assertEquals("I'm Alive!", response.getBody().getMessage());
+        System.out.println(response.getBody());
+        assertNotNull(response.getBody());
     }
 }

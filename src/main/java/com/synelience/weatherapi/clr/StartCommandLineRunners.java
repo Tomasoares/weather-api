@@ -13,19 +13,16 @@ public class StartCommandLineRunners implements CommandLineRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(StartCommandLineRunners.class);
 
     private ValidateConfigurationCLR validateConfiguration;
-    private ShowAPIKeyCLR generateAPIKey;
 
-    public StartCommandLineRunners(ValidateConfigurationCLR validateConfiguration, ShowAPIKeyCLR generateAPIKey) {
+    public StartCommandLineRunners(ValidateConfigurationCLR validateConfiguration) {
         super();
         this.validateConfiguration = validateConfiguration;
-        this.generateAPIKey = generateAPIKey;
     }
 
     @Override
     public void run(String... args) {
         LOGGER.info("Running CommandLineRunners");
         this.validateConfiguration.runValidator();
-        this.generateAPIKey.runValidator();
     }
 
 
