@@ -11,6 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Heartbeat implements Serializable {
 
-    String message;
+    private String message;
 
 }

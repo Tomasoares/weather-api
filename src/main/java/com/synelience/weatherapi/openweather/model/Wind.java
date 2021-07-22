@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class Wind implements Serializable {
 
-   private double speed;
-   private int deg;
+   private Double speed;
+   private Integer deg;
 
 }

@@ -10,9 +10,9 @@ public class CurrentWeather implements Serializable {
 
     private Weather[] weathers;
     private Main main;
-    private long visibility;
+    private Long visibility;
     private Wind wind;
     private String name;
-    private long dt;
+    private Long dt;
 
 }
