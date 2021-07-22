@@ -30,7 +30,7 @@ public class WeatherEndpointImpl implements WeatherEndpoint {
     @Override
     public ResponseEntity<CurrentWeather> callCurrentWeatherEndpoint(String city, String apiKey, String units) {
         URI uri = this.buildUrl(city, apiKey, units);
-        LOGGER.debug("Making a HTTP call to the URL: {}", uri);
+        LOGGER.info("Making a HTTP call to the URL: {}", uri);
 
         return this.template.getForEntity(uri, CurrentWeather.class);
     }

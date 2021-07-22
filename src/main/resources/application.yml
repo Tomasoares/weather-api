@@ -16,5 +16,6 @@ open-weather:
   url: http://api.openweathermap.org/data/2.5
   weather-uri: /weather
   units: metric
+  test-city: lisbon
 
 

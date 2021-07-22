@@ -18,6 +18,7 @@ public class OpenWeatherConfiguration {
     private String url;
     private String weatherUri;
     private String units;
+    private String testCity;
 
     @Bean
     public RestTemplate getRestTemplate(RestTemplateBuilder builder) {
