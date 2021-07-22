@@ -6,6 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface WeatherController {
 
-    public ResponseEntity<Weather> getWeather(String city);
+    public ResponseEntity<? extends Object> getWeather(String city);
 
 }

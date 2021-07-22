@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Data
 public class CurrentWeather implements Serializable {
 
-    private Weather[] weathers;
+    private Weather[] weather;
     private Main main;
     private Long visibility;
     private Wind wind;

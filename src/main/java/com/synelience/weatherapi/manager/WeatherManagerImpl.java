@@ -20,7 +20,8 @@ public class WeatherManagerImpl implements WeatherManager {
         this.service = service;
     }
 
-    public Optional<Weather> getCurrenWeather(String city) throws InvalidApiKeyException {
+    @Override
+    public Optional<Weather> getCurrentWeather(String city) throws InvalidApiKeyException {
         Optional<CurrentWeather> currentWeather = this.service.getCurrentWeather(city);
         return currentWeather.map(WeatherConverter::fromCurrentWeather);
     }

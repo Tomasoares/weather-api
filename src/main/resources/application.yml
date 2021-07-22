@@ -1,6 +1,10 @@
 spring:
   application:
     name: weather-api
+logging:
+  file: /logs/weather-api.log
+  level:
+    root: INFO
 
 server:
   port: 8080

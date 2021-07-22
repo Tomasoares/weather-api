@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 @SpringBootTest
-//@Disabled
-public class WeatherEndpointTest {
+// @Disabled
+public class WeatherEndpointIntegrationTest {
 
     @Autowired
     private WeatherEndpoint endpoint;

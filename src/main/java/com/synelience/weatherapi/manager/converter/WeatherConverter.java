@@ -4,15 +4,22 @@ import com.synelience.weatherapi.model.Temperature;
 import com.synelience.weatherapi.model.Weather;
 import com.synelience.weatherapi.model.Wind;
 import com.synelience.weatherapi.openweather.model.CurrentWeather;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public class WeatherConverter {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeatherConverter.class);
+
     public static Weather fromCurrentWeather(CurrentWeather old) {
+        LOGGER.debug("Converting from OpenWeather CurrentWeather to internal Weather: {}", old);
+
         Wind wind = buildWind(old);
         Temperature temperature = buildTemperature(old);
         String condition = retrieveCondition(old);
+        LOGGER.debug("Wind: {}, temperature: {}, condition: {}", wind, temperature, condition);
 
         Integer humidity = null;
         Integer pressure = null;
@@ -22,7 +29,7 @@ public class WeatherConverter {
             pressure = old.getMain().getPressure();
         }
 
-        return Weather.builder().city(old.getName())
+        Weather result = Weather.builder().city(old.getName())
                 .condition(condition)
                 .humidity(humidity)
                 .pressure(pressure)
@@ -31,6 +38,10 @@ public class WeatherConverter {
                 .wind(wind)
                 .timestamp(old.getDt())
                 .build();
+
+        LOGGER.debug("Final converteed Weather object: {}", result);
+
+        return result;
 
     }
 
@@ -54,12 +65,12 @@ public class WeatherConverter {
     }
 
     protected static String retrieveCondition(CurrentWeather old) {
-        com.synelience.weatherapi.openweather.model.Weather[] weathers = old.getWeathers();
+        com.synelience.weatherapi.openweather.model.Weather[] weatherArray = old.getWeather();
 
-        if (weathers == null || weathers.length == 0) {
+        if (weatherArray == null || weatherArray.length == 0) {
             return null;
         }
 
-        return weathers[0].getMain();
+        return weatherArray[0].getMain();
     }
 }

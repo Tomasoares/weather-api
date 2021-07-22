@@ -7,8 +7,6 @@ import com.synelience.weatherapi.openweather.model.Weather;
 import com.synelience.weatherapi.openweather.model.Wind;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
@@ -79,11 +77,11 @@ public class WeatherConverterTest {
         main.setPressure(2);
 
         Weather weather = new Weather();
-        weather.setMain("rainning");
+        weather.setMain("raining");
 
         CurrentWeather external = new CurrentWeather();
         external.setDt(System.currentTimeMillis());
-        external.setWeathers(new Weather[] {weather});
+        external.setWeather(new Weather[] {weather});
         external.setMain(main);
         external.setVisibility(123L);
 
