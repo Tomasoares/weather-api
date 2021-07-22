@@ -1,5 +1,7 @@
 package com.synelience.weatherapi.security;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         ApiKeyFilter filter = new ApiKeyFilter();
-        filter.setAuthenticationManager(new ApiKeyManager());
+        filter.setAuthenticationManager(new ApiKeyManager(this.getApiKey()));
 
         http.addFilter(filter)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -27,9 +29,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
-                .and().withUser("admin").password("password").roles("ADMIN", "USER");
+    @Bean
+    public ApiKey getApiKey() {
+        String key = RandomStringUtils.randomAlphabetic(30);
+        return new ApiKey(key);
     }
 }
