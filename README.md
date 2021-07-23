@@ -1,10 +1,10 @@
-# weather-api
+# Weather-api
 
-This Spring Boot app has the goal to make a request to the Open Weather API to return the current weather of a given city. It can be booted up with Docker Compose and it uses Basic authentication to generate Api keys.
+This Spring Boot app has the goal to do requests to the Open Weather API to get the current weather of a given city. It can be booted up with Docker Compose and it uses Basic authentication schema to generate Api keys.
 
 ## Running
 
-To run the application, it is necessary to have Docker installed on your machine. Then, you can access access the /docker subfolder and, through command line, execute "docker-compose up". The application will be exposed on port 8080.
+To run the application, it is necessary to have Docker installed on your machine. Then, you can access access the /docker subfolder of this project and, through command line, execute "docker-compose up". The application will be exposed on port 8080.
 
 ## Customizing and configuring
 
@@ -13,7 +13,11 @@ It is possible to change the port on which weather-api will accept HTTP calls. T
 
 Also, inside /config subfolder, there's an application.yml that will be loaded when the application boots up: 
 
-- To add a new user, below "users" element, add a new key:value pair such as "testuser:testpassword", so when authenticating, that pair will be recognized by the API.
+- To add a new user, below "users" element, add a new key:value pair such as "testuser:testpassword", so when authenticating, that pair will be recognized by the API. Example:
+
+users:
+  syneliencedocker: syneliencedocker
+  testuser: testpassword
 
 - Weather-api needs an Api Key from the Open Weather API to do requests. To configure it, change "api-key" value inside open-weather element to one refering to your registered user on Open Weather API.
 
@@ -44,8 +48,8 @@ Weather-api has currently 3 endpoints defined, under the /weather-api URI:
 
 - /authentication: A GET operation will return an Apikey if the credentials provided are valid and configured on application.yml. The credentials are expected to be on the "Authentication" header of the request, using Basic schema. It will return error 401 (Unauthorized) if the credentials are invalid. URL example: http://localhost:8080/weather-api/authentication
 
-- /weathers?city=<name>: A GET operation will return the current weather data from a given city name. The name is a mandatory query parameter. Also, it's necessary to be authenticated to use this resource, therefore it's necessary to add the generated apikey from /authentication endpoint to the "Authorization" header of the HTTP request. URL example: http://localhost:8080/weather-api/weathers?city=Florianopolis
+- /weathers?city=<name>: A GET operation will return the current weather data from a given city name. The name is a mandatory query parameter. Also, it's necessary to be authenticated to use this resource. Therefore it's necessary to add the generated apikey from /authentication endpoint to the "Authorization" header of the HTTP request. URL example: http://localhost:8080/weather-api/weathers?city=Florianopolis
 
 ## Future implementations
 
-There were some features from Weather-api that I'd to add or improve, such as Swagger integration, caching, a more robust Security schema and better implemented test cases.
+There were some features from Weather-api that I'd like to add or improve, such as Swagger integration, caching, a more robust Security schema and better implemented test cases.
