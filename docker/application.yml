@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: weather-api
+logging:
+  file: /logs/weather-api.log
+  level:
+    root: INFO
+
+server:
+  port: 8080
+  servlet:
+    context-path: /weather-api
+
+users:
+  syneliencedocker: syneliencedocker
+
+open-weather:
+  api-key: 2f5804bd8c1e95ea6d1f86b6e2b8f28b
+  url: http://api.openweathermap.org/data/2.5
+  weather-uri: /weather
+  units: metric
+  test-city: lisbon
+
+
